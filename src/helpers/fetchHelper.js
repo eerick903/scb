@@ -15,18 +15,10 @@ const getFetchOptions = (method, params = {}, headers = {}) => {
 const fetchRest = (method, url, { params, headers = {} }) => {
   return fetch(url, getFetchOptions(method, params, headers))
     .then(resp => {
-      const contentType = resp.headers && resp.headers.get('content-type')
-      console.log('resp', resp, contentType)
-
-      if (contentType && contentType.includes('text/csv')) {
-        return resp.text()
-      } else if(!resp.json) {
-        return resp
-      }
-
+      console.log('resp', resp)
       return resp.json()
         .then(respJson => {
-          return { ...respJson, status: resp.status }
+          return { data: respJson, status: resp.status }
         })
         .catch(err => {
           return { status: resp.status }

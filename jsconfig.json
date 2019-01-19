@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+      "target": "ES6",
+      "module": "commonjs",
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": "./",
+      "paths": {
+        "assets/*": ["./assets/*"],
+        "src/*": ["./src/*"],
+        "resources/*": ["./src/resources/*"],
+        "helpers/*": ["./src/helpers/*"],
+        "services/*": ["./src/services/*"],
+        "scenes/*": ["./src/scenes/*"],
+        "data/*": ["./src/data/*"],
+        "components/*": ["./src/components/*"]
+      }
+  }
+}

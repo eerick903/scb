@@ -1,0 +1,21 @@
+{
+  "presets": ["babel-preset-expo"],
+  "plugins": [
+    ["module-resolver", {
+      "extensions": [
+        ".js",
+        ".ios.js",
+        ".android.js"
+      ],
+      "alias": {
+        "assets": "./assets",
+        "src": "./src",
+        "helpers": "./src/helpers",
+        "services": "./src/services",
+        "scenes": "./src/scenes",
+        "data": "./src/data",
+        "components": "./src/components"
+      }
+    }]
+  ]
+}
