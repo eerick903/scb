@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Linking } from 'react-native'
-import { Container, Content, Card, CardItem, Text, Icon, Right } from 'native-base'
+import { Container, Content, Card, CardItem, Text, Accordion, Icon, Right } from 'native-base'
 import { changeScene } from 'data/scene/actions'
 
 /*
@@ -62,20 +62,31 @@ class UserDetails extends React.Component {
     )
   }
 
-  renderAddress = address => {
-    const { street, suite, city, zipcode, geo } = address
+  renderAddressContent = ({content}) => {
+    const { street, suite, city, zipcode, geo } = content
     const { lat, lng } = geo
 
     return (
+      <Card transparent>
+        {this.renderKeyValue('Street', street)}
+        {this.renderKeyValue('Suite', suite)}
+        {this.renderKeyValue('City', city)}
+        {this.renderKeyValue('Zipcode', zipcode)}
+        {this.renderKeyValue('Geo', `lat: ${lat}, lng: ${lng}`)}
+      </Card>
+    )
+  }
+
+  renderAddress = address => {
+    return (
       <CardItem style={style.cardItem}>
-        <Text note>Address</Text>
-        <Card transparent>
-          {this.renderKeyValue('Street', street)}
-          {this.renderKeyValue('Suite', suite)}
-          {this.renderKeyValue('City', city)}
-          {this.renderKeyValue('Zipcode', zipcode)}
-          {this.renderKeyValue('Geo', `lat: ${lat}, lng: ${lng}`)}
-        </Card>
+        <Accordion
+          style={{ width: '100%' }}
+          dataArray={[
+            {title: 'Address', content: address}
+          ]}
+          renderContent={this.renderAddressContent}
+        />
       </CardItem>
     )
   }
@@ -86,10 +97,10 @@ class UserDetails extends React.Component {
     return (
       <Card>
         {this.renderKeyValue('Username', username)}
-        {this.renderAddress(address)}
         {this.renderKeyValue('Phone', phone)}
         {this.renderCompany(company)}
         {this.renderKeyValue('Website', website)}
+        {this.renderAddress(address)}
       </Card>
     )
   }
@@ -98,8 +109,8 @@ class UserDetails extends React.Component {
     const { user } = this.props
 
     return (
-      <Container style={{ flex: 1, flexDirection: 'column' }}>
-        <Content>
+      <Container style={{ flex: 1, flexDirection: 'column' }} >
+        <Content padder>
           {this.renderUserDetails(user)}
         </Content>
       </Container>
