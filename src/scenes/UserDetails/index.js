@@ -2,34 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Linking } from 'react-native'
-import { Container, Content, Card, CardItem, Text, Accordion, Icon, Right } from 'native-base'
+import { Container, Content, Card, CardItem, Text, Accordion, Button } from 'native-base'
 import { changeScene } from 'data/scene/actions'
-
-/*
- {
-        id: 1,
-        name: 'Leanne Graham',
-        username: 'Bret',
-        email: 'Sincere@april.biz',
-        address: {
-          street: 'Kulas Light',
-          suite: 'Apt. 556',
-          city: 'Gwenborough',
-          zipcode: '92998-3874',
-          geo: {
-            lat: '-37.3159',
-            lng: '81.1496'
-          }
-        },
-        phone: '1-770-736-8031 x56442',
-        website: 'hildegard.org',
-        company: {
-          name: 'Romaguera-Crona',
-          catchPhrase: 'Multi-layered client-server neural-net',
-          bs: 'harness real-time e-markets'
-        }
-      }
-*/
+import { Actions } from 'react-native-router-flux';
 
 class UserDetails extends React.Component {
   constructor(props) {
@@ -111,6 +86,9 @@ class UserDetails extends React.Component {
     return (
       <Container style={{ flex: 1, flexDirection: 'column' }} >
         <Content padder>
+          <Button small primary bordered onPress={() => Actions.albums({user})}>
+            <Text>Albums</Text>
+          </Button>
           {this.renderUserDetails(user)}
         </Content>
       </Container>

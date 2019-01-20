@@ -3,28 +3,29 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Container, Content, List, ListItem, Text, Icon, Right, Left } from 'native-base'
 import { Actions } from 'react-native-router-flux'
-import { fetchUsers } from 'data/users/actions'
+import { fetchAlbums } from 'data/albums/actions'
 import { changeScene } from 'data/scene/actions'
+import R from 'ramda'
 
-class UserList extends React.Component {
+class Albums extends React.Component {
   constructor(props) {
     super(props)
-    this.props.changeScene({scene: 'userList', title: 'User List'})
+    props.changeScene({scene: 'albums', title: props.user.name})
   }
 
   componentDidMount() {
-    this.props.fetchUsers()
+    this.props.fetchAlbums(this.props.user.id)
   }
 
-  onUserPress = user => {
-    Actions.userDetails({user})
+  onAlbumPress = album => {
+    Actions.album({album})
   }
 
-  renderUser = user => {
+  renderAlbum = album => {
     return (
-      <ListItem key={user.id} onPress={() => this.onUserPress(user)}>
+      <ListItem key={album.id} onPress={() => this.onAlbumPress(album)}>
         <Left>
-          <Text>{user.name}</Text>
+          <Text>{album.title}</Text>
         </Left>
         <Right>
           <Icon name="arrow-forward" />
@@ -33,11 +34,11 @@ class UserList extends React.Component {
     )
   }
 
-  renderUserList = users => {
+  renderAlbums = albums => {
     return (
       <List>
         {
-          users.map(this.renderUser)
+          albums.map(this.renderAlbum)
         }
       </List>
     )
@@ -47,26 +48,26 @@ class UserList extends React.Component {
     return (
       <Container style={{ flex: 1, flexDirection: 'column' }}>
         <Content>
-          {this.renderUserList(this.props.users)}
+          {this.renderAlbums(this.props.albums)}
         </Content>
       </Container>
     )
   }
 }
 
-const mapStateToProps = state => {
-  const { users } = state.data
+const mapStateToProps = (state, ownProps) => {
+  const { albums } = state.data
 
   return {
-    users
+    albums: R.prop(ownProps.user.id, albums) || []
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    fetchUsers,
+    fetchAlbums,
     changeScene
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserList)
+export default connect(mapStateToProps, mapDispatchToProps)(Albums)

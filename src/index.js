@@ -7,6 +7,9 @@ import store from './store'
 import NavBar from 'components/NavBar'
 import UserList from './scenes/UserList'
 import UserDetails from 'scenes/UserDetails'
+import Albums from 'scenes/Albums'
+import Album from 'scenes/Album'
+import Photo from 'scenes/Photo'
 
 class AppRoot extends React.Component {
   async componentWillMount() {
@@ -32,6 +35,21 @@ class AppRoot extends React.Component {
                 navBar={NavBar}
                 key='userDetails'
                 component={UserDetails}
+              />
+              <Scene
+                navBar={NavBar}
+                key='albums'
+                component={Albums}
+              />
+              <Scene
+                navBar={NavBar}
+                key='album'
+                component={Album}
+              />
+              <Scene
+                navBar={NavBar}
+                key='photo'
+                component={Photo}
               />
             </Scene>
           </Router>
