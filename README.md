@@ -7,5 +7,6 @@ To run on simulator:
 1. Clone the sources
 2. Make sure you have nodejs installed
 3. Make sure you have xcode (iso) or Android sdk (android)
-4. npm install
-5. npm run ios or npm run android
+4. npm install -g expo-cli
+5. npm install
+6. npm run ios or npm run android
