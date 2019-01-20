@@ -4,16 +4,19 @@ import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from 'src/rootReducer'
 import { initSaga } from 'src/rootSaga'
+import { appConfig } from 'src/appConfig'
 
 const sagaMiddleware = createSagaMiddleware()
 const loggerMiddleware = createLogger()
-const composeEnhancers = composeWithDevTools({})
+const composeEnhancers = appConfig.debug ? composeWithDevTools({}) : compose
 
 let middlewares = [sagaMiddleware]
 
-const debugMiddlewares = [loggerMiddleware]
+if(appConfig.debug) {
+  const debugMiddlewares = [loggerMiddleware]
 
-middlewares = middlewares.concat(debugMiddlewares)
+  middlewares = middlewares.concat(debugMiddlewares)
+}
 
 const store = createStore(
   rootReducer,

@@ -15,7 +15,7 @@ const getFetchOptions = (method, params = {}, headers = {}) => {
 const fetchRest = (method, url, { params, headers = {} }) => {
   return fetch(url, getFetchOptions(method, params, headers))
     .then(resp => {
-      console.log('resp', resp)
+      // console.log('resp', resp)
       return resp.json()
         .then(respJson => {
           return { data: respJson, status: resp.status }
@@ -25,11 +25,11 @@ const fetchRest = (method, url, { params, headers = {} }) => {
         })
     })
     .then((responseJson) => {
-      console.log('responseJson', responseJson)
+      // console.log('responseJson', responseJson)
       if (!!responseJson.error || !!responseJson.errors || !!responseJson.errorCodes || responseJson.status >= 400) {
         throw responseJson
       } else {
-        console.log('Success Response JSON', responseJson)
+        // console.log('Success Response JSON', responseJson)
         return responseJson
       }
     })

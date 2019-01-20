@@ -6,5 +6,6 @@ const SERVER_URL = 'https://jsonplaceholder.typicode.com'
 export default {
   fetchUsers: () => Get(`${SERVER_URL}/users`),
   fetchAlbums: (userId) => Get(`${SERVER_URL}/users/${userId}/albums`),
+  fetchTodos: (userId) => Get(`${SERVER_URL}/users/${userId}/todos`),
   fetchPhotos: (albumId) => Get(`${SERVER_URL}/albums/${albumId}/photos`)
 }
