@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Linking } from 'react-native'
+import { View } from 'react-native'
 import { Container, Content, Card, CardItem, Text, Accordion, Button } from 'native-base'
 import { changeScene } from 'data/scene/actions'
 import { Actions } from 'react-native-router-flux';
@@ -86,9 +86,14 @@ class UserDetails extends React.Component {
     return (
       <Container style={{ flex: 1, flexDirection: 'column' }} >
         <Content padder>
-          <Button small primary bordered onPress={() => Actions.albums({user})}>
-            <Text>Albums</Text>
-          </Button>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around' }}>
+            <Button small primary bordered onPress={() => Actions.albums({user})}>
+              <Text>Albums</Text>
+            </Button>
+            <Button small primary bordered onPress={() => Actions.todos({user})}>
+              <Text>Todos</Text>
+            </Button>
+          </View>
           {this.renderUserDetails(user)}
         </Content>
       </Container>

@@ -10,6 +10,7 @@ import UserDetails from 'scenes/UserDetails'
 import Albums from 'scenes/Albums'
 import Album from 'scenes/Album'
 import Photo from 'scenes/Photo'
+import Todos from 'scenes/Todos'
 
 class AppRoot extends React.Component {
   async componentWillMount() {
@@ -50,6 +51,11 @@ class AppRoot extends React.Component {
                 navBar={NavBar}
                 key='photo'
                 component={Photo}
+              />
+              <Scene
+                navBar={NavBar}
+                key='todos'
+                component={Todos}
               />
             </Scene>
           </Router>

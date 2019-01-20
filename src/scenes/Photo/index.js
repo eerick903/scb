@@ -17,7 +17,6 @@ class Photo extends React.Component {
 
   render() {
     const { photo } = this.props
-    console.log('dim', Dimensions.get('window').width, Dimensions.get('window').height)
     return (
       <Container style={{ flex: 1, flexDirection: 'column' }} >
         <Content padder>
